@@ -1,0 +1,8 @@
+npm init
+npm install express
+npm install nodemon -D
+npm run dev
+npm install prisma
+npx prisma init
+npx prisma migrate dev --name
+npm install bcrypt
