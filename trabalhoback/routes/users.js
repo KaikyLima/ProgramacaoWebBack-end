@@ -1,42 +1,27 @@
-const prisma = require("../db/prisma"); 
+const express = require ("express")
+const { getAllUsers, createUser, updateUser, deleteUser } = require("../service/users")
+const router = express.Router()
 
+router.get("/user", async (req,res) =>{
+  const users= await getAllUsers()
+  res.json(users)
+} )
 
-const getAllUsers = () => {  
-  return prisma.user.findMany();
-}
+router.post("/user", async (req,res) =>{
+  const newuser = await createUser(req.body)
+  res.json(newuser)
+} )
 
-const createUser = ({ name, email, password }) => {  
-  
-  return prisma.user.create({
-    data: {
-      name,
-      email,
-      password
-    }
-  });
-}
+router.put("/user/:id", async(req,res) =>{
+  const userId=Number(req.params.id) 
+  const updatedUser=await updateUser(userId,req.body)
+  res.json(updatedUser)
+} )
 
-const updateUser = (id, { name, email,password }) => {  
+router.delete("/user/:id", async(req,res) =>{
+  const userId=Number(req.params.id)
+  const deletedUser=await deleteUser(userId,req.body)
+  res.json(deletedUser)
+} )
 
-  return prisma.user.update({
-    where: { id },
-    data: {
-      name,
-      email,
-      password
-    }
-  });
-};
-
-const deleteUser = (id) => { 
-  return prisma.user.delete({
-    where: { id }
-  })
-}
-
-module.exports = {  
-  getAllUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-}
+module.exports = router
