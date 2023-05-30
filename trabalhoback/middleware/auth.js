@@ -6,10 +6,8 @@ const auth = (req,res,next) => {
 
         const auth = req.headers.authorization;
         const token = auth.split(" ")[1];
-        
 
         const payload = jwt.verify(token, process.env.SECRET);
-        
         req.user = payload.user;
         next();
     }   catch (error) {

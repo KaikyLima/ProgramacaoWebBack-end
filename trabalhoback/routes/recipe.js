@@ -1,11 +1,11 @@
 const express = require ("express")
 const { getAllRecipes, createRecipe, updateRecipe, deleteRecipe } = require("../service/recipe")
-const { recipe } = require("../db/prisma")
 const auth = require("../middleware/auth")
 const router = express.Router()
 
 router.get("/recipe", auth, async (req,res) =>{
-  const recipe= await getAllRecipes()
+  const user=req.user;
+  const recipe= await getAllRecipes(user.email)
   res.json(recipe)
 } )
 

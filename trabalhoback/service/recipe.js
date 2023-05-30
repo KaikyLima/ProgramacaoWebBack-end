@@ -1,7 +1,7 @@
 const prisma = require("../db/prisma");  
 
 
-const getAllRecipes = () => {  
+const getAllRecipes = (email) => {  
   return prisma.recipe.findMany();
 }
 
