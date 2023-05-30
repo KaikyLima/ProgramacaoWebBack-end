@@ -7,11 +7,12 @@ const getAllUsers = () => {
 }
 
 const createUser = ({ name, email, password }) => {  
+  const senhaCriptografada = bcrypt.hashSync(password, 10)
   return prisma.user.create({
     data: {
       name,
       email,
-      password
+      password: senhaCriptografada
       
     }
   });
@@ -35,9 +36,16 @@ const deleteUser = (id) => {
   })
 }
 
+const getUserbyEmail = (email) => {
+  return prisma.user.findFirst({
+    where: { email }
+  })
+}
+
 module.exports = {  
   getAllUsers,
   createUser,
   updateUser,
   deleteUser,
+  getUserbyEmail,
 }
