@@ -1,4 +1,5 @@
 const prisma = require("../db/prisma"); 
+const bcrypt = require("bcrypt")
 
 
 const getAllUsers = () => {  
@@ -6,12 +7,12 @@ const getAllUsers = () => {
 }
 
 const createUser = ({ name, email, password }) => {  
-  
   return prisma.user.create({
     data: {
       name,
       email,
       password
+      
     }
   });
 }
