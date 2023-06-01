@@ -1,0 +1,65 @@
+Instruções
+Criar um projeto em NodeJs utilizando o framework express. O projeto deve ser uma aplicação backend de uma rede social simple.
+A rede social deve permitir duas operações principais: Criar novos posts e listar todos os posts criados por qualquer usuário.
+Qualquer pessoa deve conseguir ver os posts dos usuários, mesmo sem um cadastro na aplicação, porem apenas usuários cadastrados devem poder criar posts (visto que o post deve sempre ser atrelado ao usuário que o criou).
+Deve ser permitido qualquer pessoa se cadastrar na rede social.
+Um post deve ter o limite máximo de 150 caracteres.
+Respeitar o contrato abaixo:
+(mensagens de erro ou fluxos alternativos são livres para serem criadas)
+POST /register
+payload esperado:
+{
+     "name": "John Doo",
+     "email": "john@gmail.com",
+     "password": "teste123"
+}
+retorno esperado:
+STATUS 201
+{
+      "id": 1
+      "name": "John Doo",
+      "email": "john@gmail.com",
+      "password": "teste123"
+}
+POST /login
+payload esperado:
+{
+    "email": "john@gmail.com",
+    "password": "teste123"
+}
+retorno esperado:
+STATUS 200
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NTIyMDY1Nn0.lVZbbW44lyOzq_0HKhpQ0d-TXe8nLYydgAbxNCZSNFg"
+}
+GET /posts
+retorno esperado:
+STATUS 200
+{
+"posts": [
+  {
+    "id": 1,
+    "text": "essa prova é muito facil",
+    "user": {
+        "id": 1
+        "name": "John",
+    }
+  }
+]
+}
+POST /post
+payload esperado:
+{
+    "text": "essa prova é muito facil"
+}
+retorno esperado:
+STATUS 201
+{
+   "post": {
+      "id": 1,
+       "text": "essa prova é muito facil",
+       "userId": 1
+    }
+}
+
+
