@@ -19,7 +19,7 @@ model user {
   }
 
   model recipe {
-  id Int @id @default(auto  increment())
+  id Int @id @default(autoincrement())
   nome     String
   descricao   String
   tempoPreparo String

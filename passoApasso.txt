@@ -1,0 +1,25 @@
+1 - npm init -y (iniciar o projeto)
+
+npm i express prisma jsonwebtoken bcrypt  (instalar todas as dependencias)
+  
+Instalar a dependencia para atualizar o server: npm install nodemon -D
+
+
+2 - criar um arquivo server.js para colocar: 
+
+	 const express = require("express");
+  	const server = express();
+
+ 	server.use(express.json());
+
+	module.exports = server;
+
+3 - criar um arquivo index.js para colocar:
+
+	const server = require("./server");
+
+	const PORT = process.env.PORT || 8000;
+
+	server.listen(PORT,() => {
+	  console.log(`Servidor rodando na porta ${PORT}`);
+	});

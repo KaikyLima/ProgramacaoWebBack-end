@@ -1,0 +1,73 @@
+Comandos: 
+npm init -y
+npm install express
+
+Após isso, criar um arquivo .js chamado de server
+	Realizar a importação do express, no arquivo server.js
+		const express = require("express");
+		
+		const server = express();
+
+		server.use(express.json())
+
+		module.exports = server;
+
+Após realizar a configuração básica do server, criar na raiz um arquivo chamado index.js
+	Realizar a importação do server para o index
+		const server = require("./server");
+
+		const port = 8080 (criando uma váriavel para definir a porta que o servidor irá rodar)
+		
+		server.listen(port, () => { console.log(`Servidor rodando na porta ${port}`) }) (iniciando o servidor)
+
+Instalar o nodemon, para que o servidor se atualize sozinho. 
+ Comando: npm install -D nodemon (o "D" tem que ser maiusculo)
+
+Ir ao arquivo package.json, e colocar na aba de scripts
+	"dev": "nodemon index.js",
+        "start": "node index.js"
+
+Instalar o prisma
+	Comando: npm install prisma
+		 npx prisma init (criar a pasta prisma)
+
+entrar na pasta prisma e no arquivo schema, trocar o provider do datasource para "sqlite"
+	datasource db {
+ 	provider = "sqlite"
+	url = env("DATABASE_URL")}
+
+ir no arquivo .env e trocar o DATABASE para DATABASE_URL="file:../data.db"
+
+Criar o banco de dados, com os dados solicitados, exemplos: 
+
+model User {
+  	id Int @id @default(autoincrement())
+  	name String
+  	email String @unique
+  	password String
+	Task Task[]
+}
+
+model Task{
+  	id Int @id @default(autoincrement())
+  	name_task String
+  	description String
+  	is_done Boolean
+  	user User @relation(fields: [userId], references: [id])
+  	userId  Int
+}
+
+Após isso iniciar a criação com om migrate dev
+	Comando: npx prisma migrate dev
+
+Criar rotas. Criar na raiz uma pasta chamada routes, dentro dela irá criar as rotas desejadas em .js
+
+Para criar as validações, instalar o biblioteca ZOD
+	comando: npm install zod
+
+Para fazer a segurança da senha, caso tenha, é necessário instalar a biblioteca bcrypt
+	comando: npm install bcrypt
+	não esquecer de importar: const bcrypt = require("bcrypt");
+
+instalar a biblioteca de tokens
+	comando: npm install jsonwebtoken
